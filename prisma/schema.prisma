@@ -1,0 +1,307 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               String            @id @default(uuid())
+  username         String            @unique
+  email            String?           @unique
+  avatar           String?
+  role             String            @default("USER") // USER, ADMIN
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  gameSessions     GameSession[]
+  statistics       UserStatistic?
+  userAchievements UserAchievement[]
+  leaderboardEntry LeaderboardEntry?
+}
+
+model Player {
+  id               String             @id @default(uuid())
+  uuid             String             @unique @default(uuid())
+  displayName      String
+  fullName         String
+  shortName        String
+  initials         String?
+  gender           String             @default("MALE") // MALE, FEMALE
+  dateOfBirth      String?
+  dateOfDeath      String?
+  birthPlace       String?
+  birthCountry     String?
+  nationality      String
+  countryCode      String             // e.g. IN, AU, ENG, SA, NZ, PK, SL, AF, NP, US, etc.
+  playingEra       String             // e.g. "2010s", "1990s", "1890s"
+  isActive         Boolean            @default(true)
+  isRetired        Boolean            @default(false)
+  isDeceased       Boolean            @default(false)
+  
+  // Cricket Attributes
+  role             String             // Batter, Bowler, All-rounder, Wicketkeeper Batter, etc.
+  roleTags         String             // Comma-separated tags
+  battingStyle     String             // Right-hand batter, Left-hand batter
+  bowlingStyle     String?            // Right-arm fast, Leg spin, Left-arm orthodox, etc.
+  bowlingArm       String?            // Right, Left
+  wicketkeeper     Boolean            @default(false)
+  captain          Boolean            @default(false)
+  jerseyNumber     Int?
+  
+  // Debut & Retirement Years
+  debutTest        String?
+  debutODI         String?
+  debutT20I        String?
+  retirementTest   String?
+  retirementODI    String?
+  retirementT20I   String?
+  careerSpan       String             // e.g. "2008-Present"
+  
+  // Images
+  profileImage     String             // High res photo URL
+  heroImage        String?
+  silhouetteImage  String?
+  
+  // Scoring / Meta
+  difficultyScore  Float              @default(5.0) // 1.0 (Easy) to 10.0 (Legendary)
+  popularityRank   Int                @default(100)
+  dataQualityScore Int                @default(90)
+  
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  aliases          PlayerAlias[]
+  identifiers      PlayerIdentifier[]
+  images           ImageAsset[]
+  teams            PlayerTeam[]
+  competitions     PlayerCompetition[]
+  statistics       PlayerStatistic[]
+  dailyChallenges  DailyChallenge[]
+  gameSessions     GameSession[]
+  guessesAsTarget  GameGuess[]        @relation("TargetPlayer")
+  guessesAsAttempt GameGuess[]        @relation("GuessedPlayer")
+}
+
+model PlayerAlias {
+  id        String   @id @default(uuid())
+  playerId  String
+  alias     String
+  type      String   @default("NICKNAME") // NICKNAME, MISSPELLING, HISTORICAL, TRANSLITERATION
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@index([alias])
+}
+
+model PlayerIdentifier {
+  id         String   @id @default(uuid())
+  playerId   String
+  sourceName String   // cricsheet, cricinfo, cricbuzz, bcci, bigbash, etc.
+  externalId String
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceName, externalId])
+}
+
+model ImageAsset {
+  id             String    @id @default(uuid())
+  playerId       String
+  url            String
+  type           String    @default("PRIMARY") // PRIMARY, ALTERNATE, THUMBNAIL, SILHOUETTE
+  license        String    @default("PUBLIC_DOMAIN") // LICENSED, PUBLIC_DOMAIN, ADMIN_PROVIDED
+  source         String?
+  credit         String?
+  approvalStatus String    @default("APPROVED") // PENDING, APPROVED, REJECTED
+  player         Player    @relation(fields: [playerId], references: [id], onDelete: Cascade)
+}
+
+model Country {
+  code         String   @id // e.g. IN, AU, ENG, SA, NZ, PK, SL, AF, NP, US, NL, NA, etc.
+  name         String
+  region       String
+  flagEmoji    String
+  isFullMember Boolean  @default(true)
+}
+
+model Team {
+  id          String       @id @default(uuid())
+  name        String
+  shortName   String
+  countryCode String?
+  teamType    String       @default("INTERNATIONAL") // INTERNATIONAL, DOMESTIC, FRANCHISE
+  players     PlayerTeam[]
+}
+
+model PlayerTeam {
+  id        String   @id @default(uuid())
+  playerId  String
+  teamId    String
+  startYear Int?
+  endYear   Int?
+  isCurrent Boolean  @default(false)
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+}
+
+model PlayerCompetition {
+  id          String   @id @default(uuid())
+  playerId    String
+  competition String   // IPL, BBL, CPL, PSL, World Cup, Champions Trophy, etc.
+  player      Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+}
+
+model PlayerStatistic {
+  id         String   @id @default(uuid())
+  playerId   String
+  format     String   // TEST, ODI, T20I, IPL, T20_FRANCHISE
+  matches    Int      @default(0)
+  runs       Int      @default(0)
+  wickets    Int      @default(0)
+  battingAvg Float?
+  strikeRate Float?
+  bowlingAvg Float?
+  economy    Float?
+  hundreds   Int      @default(0)
+  fifties    Int      @default(0)
+  fiveWickets Int     @default(0)
+  catches    Int      @default(0)
+  stumpings  Int      @default(0)
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@unique([playerId, format])
+}
+
+model DailyChallenge {
+  id              String   @id @default(uuid())
+  challengeNumber Int      @unique
+  challengeDate   String   @unique // YYYY-MM-DD
+  playerId        String
+  difficulty      String   @default("MEDIUM") // EASY, MEDIUM, HARD, EXPERT, LEGENDARY
+  maxAttempts     Int      @default(8)
+  isPublished     Boolean  @default(true)
+  player          Player   @relation(fields: [playerId], references: [id])
+  createdAt       DateTime @default(now())
+}
+
+model GameSession {
+  id              String      @id @default(uuid())
+  sessionToken    String      @unique
+  userId          String?
+  mode            String      @default("DAILY") // DAILY, PRACTICE, LEGENDS, FRANCHISE, COUNTRY, DECADE, WOMENS, HARDCORE
+  targetPlayerId  String
+  attemptsCount   Int         @default(0)
+  maxAttempts     Int         @default(8)
+  isCompleted     Boolean     @default(false)
+  isWon           Boolean     @default(false)
+  score           Int         @default(0)
+  durationSeconds Int         @default(0)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  user            User?       @relation(fields: [userId], references: [id])
+  targetPlayer    Player      @relation(fields: [targetPlayerId], references: [id])
+  guesses         GameGuess[]
+}
+
+model GameGuess {
+  id               String      @id @default(uuid())
+  sessionId        String
+  attemptNumber    Int
+  guessedPlayerId  String
+  targetPlayerId   String
+  isCorrect        Boolean     @default(false)
+  guessFeedbackJson String     // Encoded JSON matching attributes
+  createdAt        DateTime    @default(now())
+
+  session          GameSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  guessedPlayer    Player      @relation("GuessedPlayer", fields: [guessedPlayerId], references: [id])
+  targetPlayer     Player      @relation("TargetPlayer", fields: [targetPlayerId], references: [id])
+}
+
+model UserStatistic {
+  id                   String   @id @default(uuid())
+  userId               String   @unique
+  gamesPlayed          Int      @default(0)
+  gamesWon             Int      @default(0)
+  currentStreak        Int      @default(0)
+  bestStreak           Int      @default(0)
+  guessDistributionJson String   // e.g. {"1":2, "2":5, "3":10...}
+  avgGuesses           Float    @default(0.0)
+  totalTimeSeconds     Int      @default(0)
+  updatedAt            DateTime @updatedAt
+
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model LeaderboardEntry {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  username     String
+  avatar       String?
+  timeFrame    String   @default("ALL_TIME") // DAILY, WEEKLY, MONTHLY, ALL_TIME
+  rank         Int      @default(1)
+  score        Int      @default(0)
+  winRate      Float    @default(0.0)
+  currentStreak Int     @default(0)
+  avgGuesses   Float    @default(0.0)
+  updatedAt    DateTime @updatedAt
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Achievement {
+  id               String            @id @default(uuid())
+  code             String            @unique
+  title            String
+  description      String
+  icon             String
+  category         String            @default("STREAK") // STREAK, SPEED, EXPLORATION, ACCURACY, HISTORICAL
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  id            String      @id @default(uuid())
+  userId        String
+  achievementId String
+  unlockedAt    DateTime    @default(now())
+
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+}
+
+model DataSource {
+  id             String          @id @default(uuid())
+  name           String          @unique
+  type           String          @default("CRICSHEET") // CRICSHEET, ICC, DOMESTIC, ADMIN
+  status         String          @default("ACTIVE") // ACTIVE, PAUSED, ERROR
+  lastSyncAt     DateTime?
+  recordsImported Int            @default(0)
+  importJobs     DataImportJob[]
+}
+
+model DataImportJob {
+  id               String     @id @default(uuid())
+  sourceId         String
+  status           String     @default("PENDING") // PENDING, PROCESSING, COMPLETED, FAILED
+  totalRecords     Int        @default(0)
+  processedRecords Int        @default(0)
+  matchedRecords   Int        @default(0)
+  reviewRecords    Int        @default(0)
+  errorLog         String?
+  createdAt        DateTime   @default(now())
+
+  source           DataSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  action      String
+  entityType  String
+  entityId    String?
+  details     String?
+  performedBy String   @default("SYSTEM")
+  createdAt   DateTime @default(now())
+}
