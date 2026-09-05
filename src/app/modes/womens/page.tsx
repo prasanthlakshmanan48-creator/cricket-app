@@ -6,7 +6,7 @@ import { QuizBoard } from '@/components/quiz/QuizBoard';
 export default function WomensModePage() {
   return (
     <div className="py-4">
-      <QuizBoard initialRound={2} modeTitle="Women's Cricket Tournament Quiz" />
+      <QuizBoard initialRound={1} modeKey="WOMENS" modeTitle="🏏 Women's Cricket 4-Round Quiz" />
     </div>
   );
 }

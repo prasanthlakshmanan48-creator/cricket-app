@@ -13,11 +13,13 @@ import { motion } from 'framer-motion';
 interface QuizBoardProps {
   initialRound?: number; // default 1
   modeTitle?: string;
+  modeKey?: string; // e.g. 'LEGENDS', 'FRANCHISE', 'COUNTRY', 'DECADE', 'WOMENS'
 }
 
 export const QuizBoard: React.FC<QuizBoardProps> = ({
   initialRound = 1,
   modeTitle = '4-Round Cricket Quiz Tournament',
+  modeKey,
 }) => {
   const [currentRound, setCurrentRound] = useState<number>(initialRound);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
@@ -39,15 +41,15 @@ export const QuizBoard: React.FC<QuizBoardProps> = ({
   const [showRoundSummary, setShowRoundSummary] = useState<boolean>(false);
   const [showVictoryModal, setShowVictoryModal] = useState<boolean>(false);
 
-  // Load 12 questions for current round
+  // Load 12 questions for current round filtered by modeKey
   useEffect(() => {
-    const roundQs = getQuestionsForRound(currentRound, 12);
+    const roundQs = getQuestionsForRound(currentRound, 12, modeKey);
     setQuestions(roundQs);
     setCurrentQuestionIndex(0);
     setRoundScore(0);
     setSelectedOptionIndex(null);
     setIsSubmitted(false);
-  }, [currentRound]);
+  }, [currentRound, modeKey]);
 
   const currentQuestion = questions[currentQuestionIndex];
   const roundMeta = getRoundMetadata(currentRound);

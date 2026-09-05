@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { GameBoard } from '@/components/game/GameBoard';
+import { QuizBoard } from '@/components/quiz/QuizBoard';
 
-export default function DecadePage() {
+export default function DecadeModePage() {
   return (
-    <div className="py-6">
-      <GameBoard mode="DECADE" />
+    <div className="py-4">
+      <QuizBoard initialRound={1} modeKey="DECADE" modeTitle="📅 Decade & Career Eras 4-Round Quiz" />
     </div>
   );
 }

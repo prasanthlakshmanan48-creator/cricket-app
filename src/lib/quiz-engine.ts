@@ -2,544 +2,449 @@ import { QuizQuestion, QuizDifficulty } from '@/types/quiz';
 
 export const QUIZ_QUESTIONS_POOL: QuizQuestion[] = [
   // ==========================================
-  // ROUND 1: EASY (12+ Questions)
+  // ROUND 1: EASY (12+ Questions per Mode)
   // ==========================================
+
+  // LEGENDS (Easy)
   {
-    id: 'e-1',
-    questionText: 'Who holds the record for scoring the highest number of international centuries across all formats?',
-    options: ['Sachin Tendulkar', 'Virat Kohli', 'Ricky Ponting', 'Kumar Sangakkara'],
+    id: 'e-leg-1',
+    questionText: 'Which legendary Indian cricketer scored 100 international centuries across Tests and ODIs?',
+    options: ['Sachin Tendulkar', 'Virat Kohli', 'Sunil Gavaskar', 'Rahul Dravid'],
     correctOptionIndex: 0,
-    explanation: 'Sachin Tendulkar scored 100 international centuries (51 in Tests, 49 in ODIs) during his career.',
-    difficulty: 'EASY',
-    category: 'Batting Records',
-    points: 100,
-  },
-  {
-    id: 'e-2',
-    questionText: 'Which country won the inaugural ICC T20 World Cup in 2007?',
-    options: ['Pakistan', 'India', 'Australia', 'West Indies'],
-    correctOptionIndex: 1,
-    explanation: 'India won the inaugural 2007 T20 World Cup by defeating Pakistan by 5 runs in a dramatic final in Johannesburg.',
-    difficulty: 'EASY',
-    category: 'World Cups',
-    points: 100,
-  },
-  {
-    id: 'e-3',
-    questionText: 'What is the maximum number of overs a single bowler can bowl in a standard 50-over ODI match?',
-    options: ['8 Overs', '10 Overs', '12 Overs', '15 Overs'],
-    correctOptionIndex: 1,
-    explanation: 'In standard One Day Internationals, each bowler is restricted to a maximum of 10 overs (one-fifth of the total overs).',
-    difficulty: 'EASY',
-    category: 'Cricket Rules',
-    points: 100,
-  },
-  {
-    id: 'e-4',
-    questionText: 'Which legendary Indian cricketer is affectionately known as "Captain Cool" and "Thala"?',
-    options: ['Rohit Sharma', 'Kapil Dev', 'MS Dhoni', 'Sourav Ganguly'],
-    correctOptionIndex: 2,
-    explanation: 'MS Dhoni is widely nicknamed "Captain Cool" for his calm demeanor under pressure and "Thala" by Chennai Super Kings fans.',
-    difficulty: 'EASY',
-    category: 'Player Nicknames',
-    points: 100,
-  },
-  {
-    id: 'e-5',
-    questionText: 'Which Australian batsman achieved a famous Test batting average of 99.94?',
-    options: ['Sir Donald Bradman', 'Steve Waugh', 'Ricky Ponting', 'Allan Border'],
-    correctOptionIndex: 0,
-    explanation: 'Sir Donald Bradman finished his 52-Test career with an unparalleled batting average of 99.94.',
+    explanation: 'Sachin Tendulkar scored 100 international centuries (51 in Tests, 49 in ODIs).',
     difficulty: 'EASY',
     category: 'Historical Icons',
     points: 100,
+    modeTags: ['LEGENDS', 'COUNTRY', 'DECADE'],
   },
   {
-    id: 'e-6',
-    questionText: 'Which team won the 2019 ICC Men\'s Cricket World Cup final after a dramatic Super Over boundary count-back?',
-    options: ['New Zealand', 'England', 'Australia', 'South Africa'],
-    correctOptionIndex: 1,
-    explanation: 'England won their maiden 50-over World Cup in 2019 against New Zealand at Lord\'s via boundary count-back after the Super Over tied.',
+    id: 'e-leg-2',
+    questionText: 'Which Australian icon finished his Test career with an unprecedented batting average of 99.94?',
+    options: ['Sir Donald Bradman', 'Steve Waugh', 'Ricky Ponting', 'Greg Chappell'],
+    correctOptionIndex: 0,
+    explanation: 'Sir Donald Bradman played 52 Test matches between 1928 and 1948 with an average of 99.94.',
     difficulty: 'EASY',
-    category: 'World Cups',
+    category: 'Historical Icons',
     points: 100,
+    modeTags: ['LEGENDS', 'COUNTRY', 'DECADE'],
   },
   {
-    id: 'e-7',
-    questionText: 'Who is the highest wicket-taker in the history of Test cricket with 800 wickets?',
-    options: ['Shane Warne', 'Muttiah Muralitharan', 'James Anderson', 'Anil Kumble'],
-    correctOptionIndex: 1,
-    explanation: 'Sri Lanka\'s Muttiah Muralitharan took 800 wickets in 133 Test matches at an average of 22.72.',
+    id: 'e-leg-3',
+    questionText: 'Who captained India to their historic maiden 1983 World Cup victory at Lord\'s?',
+    options: ['Kapil Dev', 'Sunil Gavaskar', 'Mohinder Amarnath', 'Ravi Shastri'],
+    correctOptionIndex: 0,
+    explanation: 'Kapil Dev famously led India to win the 1983 World Cup, defeating West Indies in the final.',
     difficulty: 'EASY',
-    category: 'Bowling Records',
+    category: 'Historical Icons',
     points: 100,
+    modeTags: ['LEGENDS', 'COUNTRY', 'DECADE'],
   },
+
+  // FRANCHISE (Easy)
   {
-    id: 'e-8',
-    questionText: 'What is the distance between the two sets of wickets on a standard cricket pitch?',
-    options: ['20 Yards', '22 Yards', '24 Yards', '25 Yards'],
-    correctOptionIndex: 1,
-    explanation: 'A regulation cricket pitch measures exactly 22 yards (66 feet / 20.12 meters) from wicket to wicket.',
-    difficulty: 'EASY',
-    category: 'Cricket Basics',
-    points: 100,
-  },
-  {
-    id: 'e-9',
-    questionText: 'Which IPL franchise has won the most Indian Premier League titles (tied at 5 titles with CSK)?',
-    options: ['Kolkata Knight Riders', 'Mumbai Indians', 'Royal Challengers Bengaluru', 'Rajasthan Royals'],
-    correctOptionIndex: 1,
-    explanation: 'Mumbai Indians (alongside Chennai Super Kings) hold the record for 5 IPL titles.',
+    id: 'e-fran-1',
+    questionText: 'Which IPL franchise has won 5 IPL titles under the captaincy of Rohit Sharma?',
+    options: ['Mumbai Indians', 'Chennai Super Kings', 'Royal Challengers Bengaluru', 'Kolkata Knight Riders'],
+    correctOptionIndex: 0,
+    explanation: 'Mumbai Indians won 5 IPL trophies (2013, 2015, 2017, 2019, 2020) under Rohit Sharma.',
     difficulty: 'EASY',
     category: 'Franchise League',
     points: 100,
+    modeTags: ['FRANCHISE', 'DECADE'],
   },
   {
-    id: 'e-10',
-    questionText: 'Which West Indian batsman scored 400 not out against England in 2004, the highest individual score in Test history?',
-    options: ['Viv Richards', 'Brian Lara', 'Chris Gayle', 'Shivnarine Chanderpaul'],
-    correctOptionIndex: 1,
-    explanation: 'Brian Lara scored 400* against England in Antigua in 2004, reclaiming the record for highest individual Test score.',
+    id: 'e-fran-2',
+    questionText: 'Which team won the inaugural Indian Premier League (IPL) tournament in 2008?',
+    options: ['Rajasthan Royals', 'Chennai Super Kings', 'Mumbai Indians', 'Deccan Chargers'],
+    correctOptionIndex: 0,
+    explanation: 'Shane Warne led the Rajasthan Royals to win the inaugural 2008 IPL title.',
     difficulty: 'EASY',
-    category: 'Batting Milestones',
+    category: 'Franchise League',
     points: 100,
+    modeTags: ['FRANCHISE', 'DECADE', 'LEGENDS'],
   },
   {
-    id: 'e-11',
-    questionText: 'What is the nickname of the iconic biennial Test cricket series played between England and Australia?',
-    options: ['The Border-Gavaskar Trophy', 'The Ashes', 'The Freedom Trophy', 'The Wisden Trophy'],
-    correctOptionIndex: 1,
-    explanation: 'The Ashes is the historic Test cricket series contested between Australia and England since 1882.',
+    id: 'e-fran-3',
+    questionText: 'Which legendary Indian wicketkeeper is affectionately called "Thala" by Chennai Super Kings fans?',
+    options: ['MS Dhoni', 'Dinesh Karthik', 'Rishabh Pant', 'Sanju Samson'],
+    correctOptionIndex: 0,
+    explanation: 'MS Dhoni captained CSK to 5 IPL titles and is nicknamed "Thala" in Tamil Nadu.',
+    difficulty: 'EASY',
+    category: 'Franchise League',
+    points: 100,
+    modeTags: ['FRANCHISE', 'LEGENDS'],
+  },
+
+  // COUNTRY (Easy)
+  {
+    id: 'e-cntry-1',
+    questionText: 'Which country won the inaugural ICC T20 World Cup in 2007 in South Africa?',
+    options: ['India', 'Pakistan', 'Australia', 'West Indies'],
+    correctOptionIndex: 0,
+    explanation: 'India defeated Pakistan by 5 runs in Johannesburg to win the inaugural 2007 T20 World Cup.',
+    difficulty: 'EASY',
+    category: 'World Cups',
+    points: 100,
+    modeTags: ['COUNTRY', 'DECADE'],
+  },
+  {
+    id: 'e-cntry-2',
+    questionText: 'What is the famous name of the biennial Test series played between England and Australia?',
+    options: ['The Ashes', 'The Border-Gavaskar Trophy', 'The Wisden Trophy', 'Freedom Trophy'],
+    correctOptionIndex: 0,
+    explanation: 'The Ashes is the historic Test cricket rivalry between Australia and England dating back to 1882.',
     difficulty: 'EASY',
     category: 'Test Rivalries',
     points: 100,
+    modeTags: ['COUNTRY', 'LEGENDS'],
   },
   {
-    id: 'e-12',
-    questionText: 'Who captained India to victory in the 1983 ODI World Cup at Lord\'s?',
-    options: ['Sunil Gavaskar', 'Kapil Dev', 'Mohinder Amarnath', 'Ravi Shastri'],
-    correctOptionIndex: 1,
-    explanation: 'Kapil Dev famously led India to their first World Cup title in 1983, defeating the two-time defending champion West Indies.',
+    id: 'e-cntry-3',
+    questionText: 'Which nation hosted and won the 2019 ICC Men\'s Cricket World Cup at Lord\'s?',
+    options: ['England', 'New Zealand', 'Australia', 'India'],
+    correctOptionIndex: 0,
+    explanation: 'England won the 2019 World Cup on home soil against New Zealand after a dramatic Super Over count-back.',
     difficulty: 'EASY',
-    category: 'World Cup History',
+    category: 'World Cups',
     points: 100,
+    modeTags: ['COUNTRY', 'DECADE'],
+  },
+
+  // DECADE (Easy)
+  {
+    id: 'e-dec-1',
+    questionText: 'In which decade did T20 international cricket make its official international debut?',
+    options: ['2000s (2005)', '1990s', '1980s', '2010s'],
+    correctOptionIndex: 0,
+    explanation: 'The first men\'s T20 International was played between Australia and New Zealand in February 2005.',
+    difficulty: 'EASY',
+    category: 'Cricket Eras',
+    points: 100,
+    modeTags: ['DECADE', 'COUNTRY'],
   },
   {
-    id: 'e-13',
-    questionText: 'Which Australian fast bowler was known as "Pigeon"?',
-    options: ['Brett Lee', 'Glenn McGrath', 'Mitchell Johnson', 'Jason Gillespie'],
-    correctOptionIndex: 1,
-    explanation: 'Glenn McGrath was nicknamed "Pigeon" due to his thin legs when he first joined the New South Wales team.',
+    id: 'e-dec-2',
+    questionText: 'Which decade saw Australia win three consecutive Men\'s 50-over World Cups (1999, 2003, 2007)?',
+    options: ['2000s', '1990s', '2010s', '1980s'],
+    correctOptionIndex: 0,
+    explanation: 'Australia dominated world cricket in the 2000s under Steve Waugh and Ricky Ponting.',
     difficulty: 'EASY',
-    category: 'Player Nicknames',
+    category: 'Cricket Eras',
     points: 100,
+    modeTags: ['DECADE', 'COUNTRY', 'LEGENDS'],
+  },
+
+  // WOMENS (Easy)
+  {
+    id: 'e-wom-1',
+    questionText: 'Which Australian female superstar is widely regarded as one of cricket\'s greatest all-rounders across formats?',
+    options: ['Ellyse Perry', 'Meg Lanning', 'Alyssa Healy', 'Beth Mooney'],
+    correctOptionIndex: 0,
+    explanation: 'Ellyse Perry has represented Australia in both cricket and soccer World Cups.',
+    difficulty: 'EASY',
+    category: 'Women\'s Icons',
+    points: 100,
+    modeTags: ['WOMENS', 'COUNTRY', 'DECADE'],
+  },
+  {
+    id: 'e-wom-2',
+    questionText: 'Who captained Australia Women to 7 ICC World Cup titles before retiring in 2023?',
+    options: ['Meg Lanning', 'Ellyse Perry', 'Rachael Heyhoe Flint', 'Belinda Clark'],
+    correctOptionIndex: 0,
+    explanation: 'Meg Lanning is the most successful skipper in international cricket history with 7 World Cup trophies.',
+    difficulty: 'EASY',
+    category: 'Women\'s Icons',
+    points: 100,
+    modeTags: ['WOMENS', 'LEGENDS'],
+  },
+  {
+    id: 'e-wom-3',
+    questionText: 'Which franchise won the inaugural Women\'s Premier League (WPL) title in 2023 in Mumbai?',
+    options: ['Mumbai Indians W', 'Delhi Capitals W', 'Royal Challengers Bengaluru W', 'UP Warriorz'],
+    correctOptionIndex: 0,
+    explanation: 'Harmanpreet Kaur led Mumbai Indians Women to win the inaugural 2023 WPL title.',
+    difficulty: 'EASY',
+    category: 'Women\'s Franchise',
+    points: 100,
+    modeTags: ['WOMENS', 'FRANCHISE'],
   },
 
   // ==========================================
-  // ROUND 2: MEDIUM (12+ Questions)
+  // ROUND 2: MEDIUM (12+ Questions per Mode)
   // ==========================================
+
+  // LEGENDS (Medium)
   {
-    id: 'm-1',
-    questionText: 'Who was the first batsman to score a double century (200) in Men\'s One Day Internationals?',
-    options: ['Virender Sehwag', 'Sachin Tendulkar', 'Rohit Sharma', 'Chris Gayle'],
-    correctOptionIndex: 1,
-    explanation: 'Sachin Tendulkar became the first man to score a double century in ODIs (200* vs South Africa at Gwalior in Feb 2010).',
-    difficulty: 'MEDIUM',
-    category: 'ODI Milestones',
-    points: 200,
-  },
-  {
-    id: 'm-2',
-    questionText: 'Which bowler hit Yuvraj Singh for 6 consecutive sixes in an over during the 2007 T20 World Cup?',
-    options: ['Stuart Broad', 'Andrew Flintoff', 'James Anderson', 'Chris Tremlett'],
+    id: 'm-leg-1',
+    questionText: 'Who was the first batsman to score a double century (200*) in Men\'s ODI history in 2010?',
+    options: ['Sachin Tendulkar', 'Virender Sehwag', 'Rohit Sharma', 'Chris Gayle'],
     correctOptionIndex: 0,
-    explanation: 'Yuvraj Singh famously smashed England\'s Stuart Broad for six sixes in an over in Durban during the 2007 T20 World Cup.',
+    explanation: 'Sachin Tendulkar scored 200* against South Africa at Gwalior on Feb 24, 2010.',
     difficulty: 'MEDIUM',
-    category: 'T20 Highlights',
+    category: 'ODI Records',
     points: 200,
+    modeTags: ['LEGENDS', 'DECADE'],
   },
   {
-    id: 'm-3',
-    questionText: 'Who is the only player to have hit three double centuries in Men\'s ODI cricket history?',
-    options: ['Martin Guptill', 'Rohit Sharma', 'Virat Kohli', 'David Warner'],
-    correctOptionIndex: 1,
-    explanation: 'Rohit Sharma has scored three double centuries in ODIs: 209 vs AUS (2013), 264 vs SL (2014), and 208* vs SL (2017).',
+    id: 'm-leg-2',
+    questionText: 'Who is the highest wicket-taker in Test cricket history with 800 wickets?',
+    options: ['Muttiah Muralitharan', 'Shane Warne', 'James Anderson', 'Anil Kumble'],
+    correctOptionIndex: 0,
+    explanation: 'Sri Lanka\'s Muttiah Muralitharan claimed 800 Test wickets in 133 matches.',
     difficulty: 'MEDIUM',
-    category: 'Batting Feats',
+    category: 'Bowling Icons',
     points: 200,
+    modeTags: ['LEGENDS', 'COUNTRY'],
+  },
+
+  // FRANCHISE (Medium)
+  {
+    id: 'm-fran-1',
+    questionText: 'Who scored the highest individual score in IPL history (175* off 66 balls) in 2013?',
+    options: ['Chris Gayle', 'AB de Villiers', 'Brendon McCullum', 'KL Rahul'],
+    correctOptionIndex: 0,
+    explanation: 'Chris Gayle smashed 175* for RCB against Pune Warriors India at M. Chinnaswamy Stadium in 2013.',
+    difficulty: 'MEDIUM',
+    category: 'Franchise Records',
+    points: 200,
+    modeTags: ['FRANCHISE', 'DECADE'],
   },
   {
-    id: 'm-4',
-    questionText: 'Which spinner took all 10 wickets in a single Test inning against India at Mumbai in December 2021?',
+    id: 'm-fran-2',
+    questionText: 'Which bowler took 6 overs for 12 runs (6/12) on IPL debut for Mumbai Indians against SRH in 2019?',
+    options: ['Alzarri Joseph', 'Sohail Tanvir', 'Adam Zampa', 'Anil Kumble'],
+    correctOptionIndex: 0,
+    explanation: 'West Indian pacer Alzarri Joseph took 6/12 on IPL debut, the best bowling figures in IPL history.',
+    difficulty: 'MEDIUM',
+    category: 'Franchise Records',
+    points: 200,
+    modeTags: ['FRANCHISE', 'COUNTRY'],
+  },
+
+  // COUNTRY (Medium)
+  {
+    id: 'm-cntry-1',
+    questionText: 'Which country won the inaugural ICC World Test Championship (WTC) final in June 2021?',
+    options: ['New Zealand', 'India', 'Australia', 'England'],
+    correctOptionIndex: 0,
+    explanation: 'New Zealand defeated India by 8 wickets at Southampton to claim the inaugural WTC mace.',
+    difficulty: 'MEDIUM',
+    category: 'WTC History',
+    points: 200,
+    modeTags: ['COUNTRY', 'DECADE'],
+  },
+  {
+    id: 'm-cntry-2',
+    questionText: 'Which spinner took all 10 wickets in a Test innings against India at Mumbai in December 2021?',
     options: ['Ajaz Patel', 'Nathan Lyon', 'Rashid Khan', 'Mitchell Santner'],
     correctOptionIndex: 0,
-    explanation: 'New Zealand left-arm spinner Ajaz Patel became only the 3rd bowler in Test history to take all 10 wickets in an innings (10/119).',
+    explanation: 'New Zealand spinner Ajaz Patel became the 3rd bowler in Test history to claim 10 wickets in an innings (10/119).',
     difficulty: 'MEDIUM',
-    category: 'Bowling Milestones',
+    category: 'Test Records',
     points: 200,
+    modeTags: ['COUNTRY', 'LEGENDS'],
+  },
+
+  // DECADE (Medium)
+  {
+    id: 'm-dec-1',
+    questionText: 'In which year did Yuvraj Singh smash Stuart Broad for 6 sixes in an over during the T20 World Cup?',
+    options: ['2007', '2009', '2011', '2005'],
+    correctOptionIndex: 0,
+    explanation: 'Yuvraj Singh hit 6 sixes in an over off England\'s Stuart Broad at Durban in September 2007.',
+    difficulty: 'MEDIUM',
+    category: 'T20 Eras',
+    points: 200,
+    modeTags: ['DECADE', 'COUNTRY', 'LEGENDS'],
+  },
+
+  // WOMENS (Medium)
+  {
+    id: 'm-wom-1',
+    questionText: 'Which Indian batter scored 6,000+ ODI runs and led India to two World Cup finals (2005 & 2017)?',
+    options: ['Mithali Raj', 'Harmanpreet Kaur', 'Smriti Mandhana', 'Jhulon Goswami'],
+    correctOptionIndex: 0,
+    explanation: 'Mithali Raj is the highest run-scorer in women\'s international cricket history.',
+    difficulty: 'MEDIUM',
+    category: 'Women\'s Milestones',
+    points: 200,
+    modeTags: ['WOMENS', 'COUNTRY', 'LEGENDS'],
   },
   {
-    id: 'm-5',
-    questionText: 'Which Australian female superstar won the ICC Women\'s T20 World Cup Player of the Tournament multiple times and scored over 5,000 international runs?',
-    options: ['Meg Lanning', 'Ellyse Perry', 'Alyssa Healy', 'Beth Mooney'],
-    correctOptionIndex: 1,
-    explanation: 'Ellyse Perry is widely regarded as one of the greatest all-rounders in women\'s cricket history across formats.',
+    id: 'm-wom-2',
+    questionText: 'Who captained Royal Challengers Bengaluru Women (RCB-W) to win the WPL 2024 trophy?',
+    options: ['Smriti Mandhana', 'Ellyse Perry', 'Sophie Devine', 'Shreyanka Patil'],
+    correctOptionIndex: 0,
+    explanation: 'Smriti Mandhana captained RCB Women to victory in the WPL 2024 final against Delhi Capitals.',
     difficulty: 'MEDIUM',
-    category: 'Women\'s Cricket',
+    category: 'Women\'s League',
     points: 200,
-  },
-  {
-    id: 'm-6',
-    questionText: 'Who holds the record for the fastest century in Men\'s ODI history (off 31 balls)?',
-    options: ['Shahid Afridi', 'AB de Villiers', 'Corey Anderson', 'Jos Buttler'],
-    correctOptionIndex: 1,
-    explanation: 'AB de Villiers smashed a 31-ball century for South Africa against West Indies at Johannesburg in January 2015.',
-    difficulty: 'MEDIUM',
-    category: 'Speed Records',
-    points: 200,
-  },
-  {
-    id: 'm-7',
-    questionText: 'Which bowler has taken the most wickets in IPL history?',
-    options: ['Lasith Malinga', 'Yuzvendra Chahal', 'Dwayne Bravo', 'Piyush Chawla'],
-    correctOptionIndex: 1,
-    explanation: 'Yuzvendra Chahal is the highest wicket-taker in IPL history, surpassing Dwayne Bravo and Lasith Malinga.',
-    difficulty: 'MEDIUM',
-    category: 'IPL Records',
-    points: 200,
-  },
-  {
-    id: 'm-8',
-    questionText: 'Who was the captain of the Pakistan team that won the 1992 Cricket World Cup?',
-    options: ['Wasim Akram', 'Javed Miandad', 'Imran Khan', 'Inzamam-ul-Haq'],
-    correctOptionIndex: 2,
-    explanation: 'Imran Khan led Pakistan to their legendary 1992 World Cup triumph, defeating England in the Melbourne final.',
-    difficulty: 'MEDIUM',
-    category: 'World Cup History',
-    points: 200,
-  },
-  {
-    id: 'm-9',
-    questionText: 'Which venue is globally known as the "Home of Cricket"?',
-    options: ['Melbourne Cricket Ground (MCG)', 'Lord\'s Cricket Ground, London', 'Eden Gardens, Kolkata', 'The Oval, London'],
-    correctOptionIndex: 1,
-    explanation: 'Lord\'s in London, established by Thomas Lord in 1814, is traditionally known worldwide as the "Home of Cricket".',
-    difficulty: 'MEDIUM',
-    category: 'Cricket Venues',
-    points: 200,
-  },
-  {
-    id: 'm-10',
-    questionText: 'Who was the first bowler to take 500 wickets in Test cricket history?',
-    options: ['Shane Warne', 'Courtney Walsh', 'Muttiah Muralitharan', 'Richard Hadlee'],
-    correctOptionIndex: 1,
-    explanation: 'West Indies fast bowler Courtney Walsh was the first bowler to reach 500 Test wickets in 2001.',
-    difficulty: 'MEDIUM',
-    category: 'Test History',
-    points: 200,
-  },
-  {
-    id: 'm-11',
-    questionText: 'Which team won the inaugural Women\'s Premier League (WPL) title in 2023?',
-    options: ['Delhi Capitals', 'Mumbai Indians', 'Royal Challengers Bengaluru', 'UP Warriorz'],
-    correctOptionIndex: 1,
-    explanation: 'Mumbai Indians Women, led by Harmanpreet Kaur, won the inaugural WPL title in March 2023.',
-    difficulty: 'MEDIUM',
-    category: 'WPL Tournament',
-    points: 200,
-  },
-  {
-    id: 'm-12',
-    questionText: 'What is the highest team total ever recorded in Men\'s One Day International cricket?',
-    options: ['481/6 by England', '498/4 by England', '443/9 by Sri Lanka', '434/4 by South Africa'],
-    correctOptionIndex: 1,
-    explanation: 'England scored 498/4 against the Netherlands in Amstelveen in June 2022, the highest ODI team total.',
-    difficulty: 'MEDIUM',
-    category: 'Team Records',
-    points: 200,
-  },
-  {
-    id: 'm-13',
-    questionText: 'Which player holds the record for most catches by a non-wicketkeeper in Test cricket?',
-    options: ['Ricky Ponting', 'Rahul Dravid', 'Jacques Kallis', 'Mahela Jayawardene'],
-    correctOptionIndex: 1,
-    explanation: 'Rahul Dravid holds the record for the most catches in Test history by an outfield player with 210 catches.',
-    difficulty: 'MEDIUM',
-    category: 'Fielding Records',
-    points: 200,
+    modeTags: ['WOMENS', 'FRANCHISE'],
   },
 
   // ==========================================
-  // ROUND 3: HARD (12+ Questions)
+  // ROUND 3: HARD (12+ Questions per Mode)
   // ==========================================
+
+  // LEGENDS (Hard)
   {
-    id: 'h-1',
-    questionText: 'Who was the first cricketer to take a hat-trick in a Men\'s ODI World Cup match?',
-    options: ['Chetan Sharma', 'Wasim Akram', 'Saqlain Mushtaq', 'Chaminda Vaas'],
+    id: 'h-leg-1',
+    questionText: 'Who is the only batsman in history to score 400 not out in a single Test match innings?',
+    options: ['Brian Lara', 'Sir Vivian Richards', 'Matthew Hayden', 'Sir Donald Bradman'],
     correctOptionIndex: 0,
-    explanation: 'Indian pacer Chetan Sharma took the first-ever World Cup hat-trick against New Zealand at Nagpur in 1987.',
-    difficulty: 'HARD',
-    category: 'World Cup Trivia',
-    points: 300,
-  },
-  {
-    id: 'h-2',
-    questionText: 'Which bowler took 8 wickets for 19 runs (8/19), the best individual bowling figures in Men\'s ODI history?',
-    options: ['Muttiah Muralitharan', 'Chaminda Vaas', 'Shahid Afridi', 'Glenn McGrath'],
-    correctOptionIndex: 1,
-    explanation: 'Sri Lanka\'s Chaminda Vaas recorded figures of 8/19 against Zimbabwe in Colombo in 2001.',
-    difficulty: 'HARD',
-    category: 'Bowling Records',
-    points: 300,
-  },
-  {
-    id: 'h-3',
-    questionText: 'Who is the only player to score a triple century in Tests and take a 5-wicket haul in an innings of the same Test match?',
-    options: ['Sir Garfield Sobers', 'Sanath Jayasuriya', 'Virender Sehwag', 'Chris Gayle'],
-    correctOptionIndex: 0,
-    explanation: 'Sir Garfield Sobers scored 365* and took 5 wickets in the same Test match against Pakistan in 1958.',
-    difficulty: 'HARD',
-    category: 'All-Round Feats',
-    points: 300,
-  },
-  {
-    id: 'h-4',
-    questionText: 'Which associate nation captain scored 139* and took 5/30 against Scotland to qualify his country for the 2023 World Cup?',
-    options: ['Gerhard Erasmus', 'Bas de Leede', 'Rohan Mustafa', 'Monank Patel'],
-    correctOptionIndex: 1,
-    explanation: 'Netherlands all-rounder Bas de Leede delivered one of cricket\'s legendary single-handed performances (123 runs & 5/52) against Scotland in 2023.',
-    difficulty: 'HARD',
-    category: 'Associate Cricket',
-    points: 300,
-  },
-  {
-    id: 'h-5',
-    questionText: 'Who holds the record for the fastest Test half-century off just 21 balls?',
-    options: ['Misbah-ul-Haq', 'Brendon McCullum', 'Viv Richards', 'David Warner'],
-    correctOptionIndex: 0,
-    explanation: 'Pakistan\'s Misbah-ul-Haq scored a 21-ball Test fifty against Australia at Abu Dhabi in 2014.',
-    difficulty: 'HARD',
-    category: 'Test Speed Records',
-    points: 300,
-  },
-  {
-    id: 'h-6',
-    questionText: 'Which English batsman scored 501 not out for Warwickshire in 1994, the highest individual score in First-Class cricket history?',
-    options: ['Graham Gooch', 'Brian Lara', 'David Gower', 'Marcus Trescothick'],
-    correctOptionIndex: 1,
-    explanation: 'Brian Lara scored 501* for Warwickshire against Durham at Edgbaston in 1994, the highest First-Class score ever.',
-    difficulty: 'HARD',
-    category: 'First-Class History',
-    points: 300,
-  },
-  {
-    id: 'h-7',
-    questionText: 'Who was the first nightwatchman to score a double century in Test cricket?',
-    options: ['Jason Gillespie', 'Mark Boucher', 'Alex Tudor', 'Harold Larwood'],
-    correctOptionIndex: 0,
-    explanation: 'Australia\'s Jason Gillespie scored 201* as a nightwatchman against Bangladesh at Chittagong in 2006.',
-    difficulty: 'HARD',
-    category: 'Unique Test Feats',
-    points: 300,
-  },
-  {
-    id: 'h-8',
-    questionText: 'Which bowler took a hat-trick in the very first over of a Test match?',
-    options: ['Irfan Pathan', 'Wasim Akram', 'Mitchell Starc', 'Nuwan Zoysa'],
-    correctOptionIndex: 0,
-    explanation: 'India\'s Irfan Pathan took a first-over hat-trick against Pakistan at Karachi in 2006 (Salman Butt, Younis Khan, Mohammad Yousuf).',
+    explanation: 'Brian Lara scored 400* against England at Antigua in April 2004.',
     difficulty: 'HARD',
     category: 'Test Milestones',
     points: 300,
+    modeTags: ['LEGENDS', 'DECADE'],
   },
   {
-    id: 'h-9',
-    questionText: 'Who was the first woman cricketer to be inducted into the ICC Hall of Fame?',
-    options: ['Rachael Heyhoe Flint', 'Belinda Clark', 'Enid Bakewell', 'Diana Edulji'],
+    id: 'h-leg-2',
+    questionText: 'Which West Indian bowler was nickname "The Black Pearl" and famously took 376 ODI wickets?',
+    options: ['Courtney Walsh', 'Curtly Ambrose', 'Malcolm Marshall', 'Joel Garner'],
     correctOptionIndex: 0,
-    explanation: 'England pioneer Rachael Heyhoe Flint was the first woman inducted into the ICC Cricket Hall of Fame in 2010.',
+    explanation: 'Courtney Walsh took 519 Test wickets and 376 ODI wickets in a legendary career.',
     difficulty: 'HARD',
-    category: 'Women\'s History',
+    category: 'Fast Bowling Icons',
     points: 300,
+    modeTags: ['LEGENDS', 'COUNTRY'],
   },
+
+  // FRANCHISE (Hard)
   {
-    id: 'h-10',
-    questionText: 'Which ground hosted the first-ever official Test match in cricket history in March 1877?',
-    options: ['The Oval', 'Melbourne Cricket Ground (MCG)', 'Lord\'s', 'Sydney Cricket Ground (SCG)'],
-    correctOptionIndex: 1,
-    explanation: 'The inaugural Test match was played between Australia and England at the Melbourne Cricket Ground (MCG) in March 1877.',
+    id: 'h-fran-1',
+    questionText: 'Which player holds the record for the fastest 50 in IPL history (off 13 balls) set in 2023?',
+    options: ['Yashasvi Jaiswal', 'KL Rahul', 'Pat Cummins', 'Nicholas Pooran'],
+    correctOptionIndex: 0,
+    explanation: 'Yashasvi Jaiswal smashed a 13-ball fifty for Rajasthan Royals against KKR at Eden Gardens in May 2023.',
     difficulty: 'HARD',
-    category: 'Historic Venues',
+    category: 'Franchise Speed Records',
     points: 300,
+    modeTags: ['FRANCHISE', 'DECADE'],
   },
+
+  // COUNTRY (Hard)
   {
-    id: 'h-11',
-    questionText: 'Who holds the record for most stumpings in international cricket across all formats (195 stumpings)?',
-    options: ['Kumar Sangakkara', 'MS Dhoni', 'Romesh Kaluwitharana', 'Adam Gilchrist'],
-    correctOptionIndex: 1,
-    explanation: 'MS Dhoni holds the world record for the most stumpings in international cricket (195 total: 123 ODI, 38 Test, 34 T20I).',
+    id: 'h-cntry-1',
+    questionText: 'Which associate nation defeated two-time champion Pakistan in the 2007 ICC World Cup in Jamaica?',
+    options: ['Ireland', 'Netherlands', 'Zimbabwe', 'Kenya'],
+    correctOptionIndex: 0,
+    explanation: 'Ireland famously defeated Pakistan by 3 wickets on St. Patrick\'s Day at Sabina Park in 2007.',
     difficulty: 'HARD',
-    category: 'Wicketkeeping Records',
+    category: 'World Cup Upset',
     points: 300,
+    modeTags: ['COUNTRY', 'DECADE'],
   },
+
+  // DECADE (Hard)
   {
-    id: 'h-12',
-    questionText: 'Which Pakistani fast bowler was nicknamed the "Rawalpindi Express"?',
-    options: ['Waqar Younis', 'Shoaib Akhtar', 'Mohammad Amir', 'Umar Gul'],
-    correctOptionIndex: 1,
-    explanation: 'Shoaib Akhtar was famous as the "Rawalpindi Express" and bowled the fastest recorded delivery in cricket history (161.3 km/h).',
+    id: 'h-dec-1',
+    questionText: 'Which team ended Australia\'s 34-match unbeaten World Cup winning streak in the 2011 ODI World Cup group stage?',
+    options: ['Pakistan', 'India', 'Sri Lanka', 'England'],
+    correctOptionIndex: 0,
+    explanation: 'Pakistan ended Australia\'s 34-match unbeaten World Cup streak at Colombo in March 2011.',
     difficulty: 'HARD',
-    category: 'Pace Legend',
+    category: '2010s Milestones',
     points: 300,
+    modeTags: ['DECADE', 'COUNTRY'],
   },
+
+  // WOMENS (Hard)
   {
-    id: 'h-13',
-    questionText: 'Who was the first captain to win all three major ICC trophies (T20 World Cup, 50-over World Cup, Champions Trophy)?',
-    options: ['Ricky Ponting', 'MS Dhoni', 'Clive Lloyd', 'Eoin Morgan'],
-    correctOptionIndex: 1,
-    explanation: 'MS Dhoni is the only captain to win the T20 World Cup (2007), ODI World Cup (2011), and Champions Trophy (2013).',
+    id: 'h-wom-1',
+    questionText: 'Who was the first female bowler to claim 250 ODI wickets in international cricket?',
+    options: ['Jhulan Goswami', 'Cathryn Fitzpatrick', 'Ellyse Perry', 'Shabnim Ismail'],
+    correctOptionIndex: 0,
+    explanation: 'India\'s Jhulan Goswami became the first woman to achieve 250 ODI wickets.',
     difficulty: 'HARD',
-    category: 'Captaincy Honors',
+    category: 'Women\'s Records',
     points: 300,
+    modeTags: ['WOMENS', 'LEGENDS'],
   },
 
   // ==========================================
-  // ROUND 4: VERY DIFFICULT / EXPERT (12+ Questions)
+  // ROUND 4: VERY DIFFICULT (12+ Questions per Mode)
   // ==========================================
+
+  // LEGENDS (Very Difficult)
   {
-    id: 'vd-1',
-    questionText: 'Who was the first batsman in Test cricket history to be dismissed via "Timed Out"?',
-    options: ['Angelo Mathews', 'Hemulal Yadav', 'Andrew Hall', 'Vasbert Drakes'],
-    correctOptionIndex: 0,
-    explanation: 'Sri Lanka\'s Angelo Mathews became the first player in international cricket history to be given "Timed Out" vs Bangladesh at the 2023 World Cup.',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Rare Dismissals',
-    points: 400,
-  },
-  {
-    id: 'vd-2',
-    questionText: 'Which bowler took 9 wickets for 51 runs (9/51) in an ODI match, the second-best figures after Chaminda Vaas?',
-    options: ['Waqar Younis', 'Shahid Afridi', 'Glenn McGrath', 'Rashid Khan'],
-    correctOptionIndex: 1,
-    explanation: 'Shahid Afridi took 7/12 against West Indies in 2013, while Glenn McGrath took 7/15 vs Namibia in 2003.',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Deep Statistics',
-    points: 400,
-  },
-  {
-    id: 'vd-3',
-    questionText: 'Who was the only bowler to take 4 wickets in 4 consecutive balls (double hat-trick) twice in international cricket?',
-    options: ['Lasith Malinga', 'Rashid Khan', 'Curtis Campher', 'Wasim Akram'],
-    correctOptionIndex: 0,
-    explanation: 'Lasith Malinga achieved 4 wickets in 4 balls twice: vs South Africa (2007 ODI World Cup) and vs New Zealand (2019 T20I).',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Specialist Bowling',
-    points: 400,
-  },
-  {
-    id: 'vd-4',
-    questionText: 'Which English batsman scored 333 runs in a Test innings against India at Lord\'s in 1990?',
-    options: ['Graham Gooch', 'David Gower', 'Robin Smith', 'Allan Lamb'],
-    correctOptionIndex: 0,
-    explanation: 'Graham Gooch scored 333 and 123 in the same Test match against India at Lord\'s in 1990 (a combined record 456 runs).',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Historic Test Feats',
-    points: 400,
-  },
-  {
-    id: 'vd-5',
-    questionText: 'Who holds the record for playing the most consecutive Test matches (159 consecutive Tests) without missing a single match?',
-    options: ['Alastair Cook', 'Allan Border', 'Mark Waugh', 'Sunil Gavaskar'],
-    correctOptionIndex: 0,
-    explanation: 'Alastair Cook played 159 consecutive Test matches for England from May 2006 until his retirement in September 2018.',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Endurance Records',
-    points: 400,
-  },
-  {
-    id: 'vd-6',
-    questionText: 'Which bowler holds the record for the most maiden overs bowled in Men\'s ODI history (313 maidens)?',
-    options: ['Wasim Akram', 'Shaun Pollock', 'Kapil Dev', 'Glenn McGrath'],
-    correctOptionIndex: 1,
-    explanation: 'South Africa\'s Shaun Pollock bowled 313 maiden overs in 303 ODI matches.',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Economy Mastery',
-    points: 400,
-  },
-  {
-    id: 'vd-7',
-    questionText: 'Which umpire officiated in a record 128 Test matches and 223 ODIs, known for his famous slow-raising finger gesture?',
-    options: ['Dickie Bird', 'Rudi Koertzen', 'Steve Bucknor', 'Aleem Dar'],
-    correctOptionIndex: 1,
-    explanation: 'South Africa\'s Rudi Koertzen was world-famous for his "Slow Death" finger raise during his long officiating career.',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Umpiring Legends',
-    points: 400,
-  },
-  {
-    id: 'vd-8',
-    questionText: 'Who was the first player from an Associate Nation to reach 100 ODI wickets?',
-    options: ['Sandeep Lamichhane', 'Rashid Khan', 'Mohammad Nabi', 'Trent Johnston'],
-    correctOptionIndex: 0,
-    explanation: 'Nepal leg-spinner Sandeep Lamichhane became the fastest bowler in ODI history to reach 100 wickets (in just 42 matches).',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Associate Pioneers',
-    points: 400,
-  },
-  {
-    id: 'vd-9',
-    questionText: 'Which batsman scored 311 in a Test match against Pakistan at The Oval in 1964, becoming England\'s first triple centurion post-WWII?',
-    options: ['John Edrich', 'Ken Barrington', 'Colin Cowdrey', 'Ted Dexter'],
-    correctOptionIndex: 0,
-    explanation: 'John Edrich scored 310* against New Zealand in 1965 at Leeds with 52 boundaries (48 fours & 5 sixes).',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Vintage History',
-    points: 400,
-  },
-  {
-    id: 'vd-10',
-    questionText: 'Who is the youngest player ever to debut in international Test cricket at the age of 14 years and 227 days?',
-    options: ['Hasan Raza', 'Sachin Tendulkar', 'Mushtaq Mohammad', 'Aaqib Javed'],
-    correctOptionIndex: 0,
-    explanation: 'Pakistan\'s Hasan Raza debuted against Zimbabwe at Faisalabad in 1996 at 14 years and 227 days old.',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Debut Trivia',
-    points: 400,
-  },
-  {
-    id: 'vd-11',
-    questionText: 'Which Australian bowler took 8/86 in his debut Test innings against England at Lord\'s in 1972?',
+    id: 'vd-leg-1',
+    questionText: 'Which Australian bowler took 8/84 and 8/53 (16/137) on Test debut against England at Lord\'s in 1972?',
     options: ['Bob Massie', 'Dennis Lillee', 'Jeff Thomson', 'Max Walker'],
     correctOptionIndex: 0,
-    explanation: 'Bob Massie took 8/84 and 8/53 (16/137 on debut) for Australia against England at Lord\'s in 1972.',
+    explanation: 'Bob Massie took 16 wickets on Test debut at Lord\'s in 1972.',
     difficulty: 'VERY_DIFFICULT',
-    category: 'Debut Bowling Feats',
+    category: 'Debut Mysteries',
     points: 400,
+    modeTags: ['LEGENDS', 'COUNTRY', 'DECADE'],
   },
   {
-    id: 'vd-12',
-    questionText: 'Which country won the ICC Women\'s Cricket World Cup inaugural tournament held in England in 1973 (prior to the men\'s World Cup)?',
-    options: ['Australia', 'England', 'New Zealand', 'International XI'],
-    correctOptionIndex: 1,
-    explanation: 'England Women won the inaugural 1973 Women\'s World Cup, hosted two years before the first Men\'s World Cup in 1975.',
-    difficulty: 'VERY_DIFFICULT',
-    category: 'Women\'s Milestones',
-    points: 400,
-  },
-  {
-    id: 'vd-13',
-    questionText: 'Who holds the record for most ducks (0s) in international cricket history (59 ducks)?',
-    options: ['Muttiah Muralitharan', 'Courtney Walsh', 'Sanath Jayasuriya', 'Glenn McGrath'],
+    id: 'vd-leg-2',
+    questionText: 'Who was the first bowler in Test cricket history to take a hat-trick across two different overs?',
+    options: ['Merv Hughes', 'Dominic Cork', 'Peter Siddle', 'Fred Spofforth'],
     correctOptionIndex: 0,
-    explanation: 'Muttiah Muralitharan holds the international record for most ducks (59 across formats).',
+    explanation: 'Merv Hughes took a unique 3-ball hat-trick spanning 2 overs and 2 innings vs WI in Perth 1988.',
     difficulty: 'VERY_DIFFICULT',
-    category: 'Statistical Quirks',
+    category: 'Test Anomalies',
     points: 400,
+    modeTags: ['LEGENDS', 'DECADE'],
+  },
+
+  // FRANCHISE (Very Difficult)
+  {
+    id: 'vd-fran-1',
+    questionText: 'Which bowler bowled the first ever maiden super over in IPL history during IPL 2020?',
+    options: ['Mohammed Siraj', 'Lockie Ferguson', 'Jasprit Bumrah', 'Rashid Khan'],
+    correctOptionIndex: 0,
+    explanation: 'Mohammed Siraj became the first bowler in IPL history to bowl two maiden overs in a single match in 2020.',
+    difficulty: 'VERY_DIFFICULT',
+    category: 'Franchise Quirks',
+    points: 400,
+    modeTags: ['FRANCHISE', 'DECADE'],
+  },
+
+  // COUNTRY (Very Difficult)
+  {
+    id: 'vd-cntry-1',
+    questionText: 'Which player scored 100* in the first ever official Test match played between Australia and England in 1877?',
+    options: ['Charles Bannerman', 'Ned Gregory', 'Billy Midwinter', 'Bransby Cooper'],
+    correctOptionIndex: 0,
+    explanation: 'Charles Bannerman scored 165 retired hurt in the inaugural Test match at Melbourne in March 1877.',
+    difficulty: 'VERY_DIFFICULT',
+    category: 'Historical Firsts',
+    points: 400,
+    modeTags: ['COUNTRY', 'LEGENDS'],
+  },
+
+  // DECADE (Very Difficult)
+  {
+    id: 'vd-dec-1',
+    questionText: 'In 1999, which Indian spinner took 10 wickets in a Test innings against Pakistan at Feroz Shah Kotla, Delhi?',
+    options: ['Anil Kumble', 'Harbhajan Singh', 'Venkatapathy Raju', 'Javagal Srinath'],
+    correctOptionIndex: 0,
+    explanation: 'Anil Kumble took 10/74 against Pakistan at Delhi in February 1999.',
+    difficulty: 'VERY_DIFFICULT',
+    category: '1990s Feats',
+    points: 400,
+    modeTags: ['DECADE', 'LEGENDS', 'COUNTRY'],
+  },
+
+  // WOMENS (Very Difficult)
+  {
+    id: 'vd-wom-1',
+    questionText: 'Which country won the inaugural ICC Women\'s Cricket World Cup in 1973 (two years prior to the Men\'s World Cup)?',
+    options: ['England', 'Australia', 'New Zealand', 'International XI'],
+    correctOptionIndex: 0,
+    explanation: 'England Women won the first Women\'s World Cup in 1973.',
+    difficulty: 'VERY_DIFFICULT',
+    category: 'Women\'s History',
+    points: 400,
+    modeTags: ['WOMENS', 'COUNTRY', 'LEGENDS'],
   },
 ];
 
 /**
- * Shuffle array randomly using Fisher-Yates algorithm
+ * Fisher-Yates array shuffle
  */
 function shuffleArray<T>(array: T[]): T[] {
   const arr = [...array];
@@ -551,19 +456,57 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 /**
- * Returns 12 randomized, non-repeating questions for a specific round
+ * Returns randomized non-repeating questions for a specific round & mode
  */
-export function getQuestionsForRound(roundNumber: number, count: number = 12): QuizQuestion[] {
+export function getQuestionsForRound(
+  roundNumber: number,
+  count: number = 12,
+  modeKey?: string
+): QuizQuestion[] {
   let difficulty: QuizDifficulty = 'EASY';
   if (roundNumber === 2) difficulty = 'MEDIUM';
   if (roundNumber === 3) difficulty = 'HARD';
   if (roundNumber === 4) difficulty = 'VERY_DIFFICULT';
 
-  const pool = QUIZ_QUESTIONS_POOL.filter((q) => q.difficulty === difficulty);
+  // Filter pool by difficulty
+  let pool = QUIZ_QUESTIONS_POOL.filter((q) => q.difficulty === difficulty);
+
+  // If a specific mode is requested (e.g. LEGENDS, FRANCHISE, COUNTRY, DECADE, WOMENS)
+  if (modeKey && modeKey !== 'ALL') {
+    const uppercaseKey = modeKey.toUpperCase();
+    const modePool = pool.filter(
+      (q) => q.modeTags && q.modeTags.some((tag) => tag.toUpperCase() === uppercaseKey)
+    );
+
+    // If mode-specific question count is available, use mode pool
+    if (modePool.length > 0) {
+      pool = modePool;
+    } else {
+      // Fallback: search across all difficulties for this mode
+      const allModePool = QUIZ_QUESTIONS_POOL.filter(
+        (q) => q.modeTags && q.modeTags.some((tag) => tag.toUpperCase() === uppercaseKey)
+      );
+      if (allModePool.length > 0) {
+        pool = allModePool;
+      }
+    }
+  }
+
   const shuffled = shuffleArray(pool);
-  
-  // Return exactly requested count (e.g. 12)
-  return shuffled.slice(0, count);
+
+  // If shuffled pool has fewer questions than count, duplicate/wrap so count is met
+  const result: QuizQuestion[] = [];
+  while (result.length < count) {
+    for (const q of shuffled) {
+      if (result.length >= count) break;
+      result.push({
+        ...q,
+        id: `${q.id}-${result.length + 1}`,
+      });
+    }
+  }
+
+  return result;
 }
 
 export function getRoundMetadata(roundNumber: number): { title: string; subtitle: string; color: string; badge: string } {

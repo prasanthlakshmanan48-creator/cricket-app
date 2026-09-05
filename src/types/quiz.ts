@@ -9,6 +9,7 @@ export interface QuizQuestion {
   difficulty: QuizDifficulty;
   category: string;
   points: number;
+  modeTags?: string[]; // e.g. ['LEGENDS', 'FRANCHISE', 'COUNTRY', 'DECADE', 'WOMENS']
 }
 
 export interface UserQuestionAnswer {
