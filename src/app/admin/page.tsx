@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { 
   ShieldAlert, 
   GitMerge, 
@@ -125,6 +126,13 @@ export default function AdminPage() {
             </button>
           );
         })}
+        <Link
+          href="/admin/questions"
+          onClick={() => soundFx.playClick()}
+          className="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500/20 border border-amber-500/40 text-amber-400 hover:bg-amber-500/30 transition-all flex items-center gap-2"
+        >
+          <Sparkles className="w-4 h-4" /> AI Questions Review & Control
+        </Link>
       </div>
 
       {/* Tab 1: System Overview */}
