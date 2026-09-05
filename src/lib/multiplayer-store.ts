@@ -7,6 +7,7 @@ import {
   EloTier,
   ReactionEmote,
 } from '@/types/multiplayer';
+import { realPresenceStore } from '@/lib/presence-store';
 
 // In-memory persistent data store for multiplayer sessions
 class MultiplayerStore {
@@ -185,6 +186,9 @@ class MultiplayerStore {
     rating: number = 1200,
     mode: MatchMode = 'RANKED_1V1'
   ): MatchmakingTicket {
+    // Register presence in global real-time presence store
+    realPresenceStore.registerPresence(playerId, username, 'SEARCHING');
+
     // Remove existing ticket if any
     this.queue = this.queue.filter((t) => t.playerId !== playerId);
 

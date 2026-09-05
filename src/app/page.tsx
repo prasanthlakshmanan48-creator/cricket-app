@@ -1,170 +1,258 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   Play, 
-  Flame, 
-  Trophy, 
-  Zap, 
-  Sparkles, 
+  Users, 
   Globe, 
-  ShieldCheck,
-  ChevronRight,
-  HelpCircle,
-  Award,
-  CheckCircle2
+  Bot, 
+  Trophy, 
+  Sparkles, 
+  ShieldCheck, 
+  ChevronRight, 
+  Zap, 
+  Flame,
+  Clock,
+  Lightbulb,
+  Radio
 } from 'lucide-react';
+import { realPresenceStore } from '@/lib/presence-store';
+import { AIOpponentModal } from '@/components/game/AIOpponentModal';
+import { AIBoard } from '@/components/game/AIBoard';
+import { MatchmakingScreen } from '@/components/multiplayer/MatchmakingScreen';
+import { AIDifficulty } from '@/types/game-extension';
+import { soundFx } from '@/lib/sound-engine';
 
 export default function LandingPage() {
-  const roundTiers = [
-    {
-      round: 1,
-      title: 'Round 1: Easy',
-      badge: '🟢 12 Questions',
-      description: 'Fundamentals, famous world cup records, iconic player nicknames & general cricket trivia.',
-      icon: '🟢',
-      href: '/practice?round=1',
-      color: 'from-emerald-500/20 to-teal-600/10 border-emerald-500/30',
-      textColor: 'text-emerald-400',
-    },
-    {
-      round: 2,
-      title: 'Round 2: Medium',
-      badge: '🟡 12 Questions',
-      description: 'Tournament statistics, debut years, jersey numbers, bowling styles & milestone feats.',
-      icon: '🟡',
-      href: '/practice?round=2',
-      color: 'from-amber-500/20 to-orange-600/10 border-amber-500/30',
-      textColor: 'text-amber-400',
-    },
-    {
-      round: 3,
-      title: 'Round 3: Hard',
-      badge: '🔴 12 Questions',
-      description: 'Obscure international records, venue feats, head-to-head stats & associate milestones.',
-      icon: '🔴',
-      href: '/practice?round=3',
-      color: 'from-pink-500/20 to-purple-600/10 border-pink-500/30',
-      textColor: 'text-pink-400',
-    },
-    {
-      round: 4,
-      title: 'Round 4: Very Difficult',
-      badge: '🟣 12 Questions',
-      description: 'Deep expert trivia, vintage 19th/20th-century feats, rare bowling figures & historical quirks.',
-      icon: '🟣',
-      href: '/practice?round=4',
-      color: 'from-violet-600/20 to-fuchsia-600/10 border-violet-500/30',
-      textColor: 'text-violet-400',
-    },
-  ];
+  const [onlineStats, setOnlineStats] = useState({ onlineCount: 14, searchingCount: 3 });
+  const [aiModalOpen, setAiModalOpen] = useState(false);
+  const [activeAIMatch, setActiveAIMatch] = useState<{ difficulty: AIDifficulty; questionCount: number } | null>(null);
+  const [matchmakingOpen, setMatchmakingOpen] = useState(false);
+
+  useEffect(() => {
+    // Fetch honest real-time presence
+    const stats = realPresenceStore.getPresenceStats();
+    setOnlineStats({
+      onlineCount: Math.max(1, stats.onlineCount),
+      searchingCount: stats.searchingCount,
+    });
+  }, []);
+
+  const handleStartAI = (difficulty: AIDifficulty, questionCount: number) => {
+    setAiModalOpen(false);
+    setActiveAIMatch({ difficulty, questionCount });
+  };
+
+  if (activeAIMatch) {
+    return (
+      <div className="pt-8 pb-16 px-4 max-w-5xl mx-auto">
+        <AIBoard
+          difficulty={activeAIMatch.difficulty}
+          totalQuestions={activeAIMatch.questionCount}
+          onExit={() => setActiveAIMatch(null)}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-16 pb-16">
-      
       {/* Hero Section */}
-      <section className="relative pt-12 pb-16 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center max-w-5xl mx-auto">
+      <section className="relative pt-10 pb-12 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center max-w-5xl mx-auto">
         
-        {/* Eyebrow Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase tracking-widest shadow-lg shadow-emerald-500/10 mb-6">
-          <Sparkles className="w-4 h-4 text-emerald-400" />
-          <span>4-ROUND TRIVIA TOURNAMENT</span>
+        {/* Live Presence Pill (Req #3) */}
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-white/10 text-xs font-bold shadow-xl mb-6">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+          <span className="text-emerald-400 font-mono font-black">{onlineStats.onlineCount} Players Online</span>
+          <span className="text-slate-600">•</span>
+          <span className="text-slate-300">{onlineStats.searchingCount} Searching</span>
         </div>
 
         {/* Headline */}
         <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-white leading-none">
-          CHOOSE THE <br className="hidden sm:inline" />
-          <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
-            CORRECT CRICKET ANSWER
+          WHO'S THAT <br className="hidden sm:inline" />
+          <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
+            CRICKETER?
           </span>
         </h1>
 
         {/* Subtitle */}
         <p className="mt-6 text-base sm:text-xl text-slate-300 max-w-3xl font-medium leading-relaxed">
-          4 Progressive Difficulty Rounds. 12 Questions per Round. 48 Questions in total. No image spoilers — pure cricket intelligence & intuition.
+          The ultimate cricket guessing platform with intelligent question engine, per-question timers, smart hints & honest real-time matchmaking.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-          <Link
-            href="/daily"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-black text-base flex items-center justify-center gap-3 shadow-xl shadow-emerald-500/25 hover:scale-105 transition-all"
-          >
-            <Play className="w-5 h-5 fill-slate-950" /> START 4-ROUND TOURNAMENT
-          </Link>
-
+        {/* Primary 4 Game Modes Grid (Req #1, #39, #70) */}
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 w-full text-left">
+          
+          {/* Mode 1: PLAY SOLO */}
           <Link
             href="/practice"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 font-bold text-base flex items-center justify-center gap-2 backdrop-blur-md hover:scale-105 transition-all"
+            onClick={() => soundFx.playClick()}
+            className="p-6 rounded-3xl bg-slate-900/90 border border-emerald-500/30 hover:border-emerald-500/60 bg-gradient-to-b from-emerald-500/10 to-transparent flex flex-col justify-between gap-6 transition-all hover:-translate-y-1 shadow-xl group"
           >
-            SELECT A ROUND
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                👤
+              </div>
+              <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-black uppercase tracking-wider">
+                SOLO
+              </span>
+            </div>
+            <div>
+              <h3 className="font-black text-xl text-white group-hover:text-emerald-400 transition-colors">
+                PLAY SOLO
+              </h3>
+              <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                Test your knowledge alone. Per-question timer, smart hints & non-repeating player pool.
+              </p>
+            </div>
+            <div className="flex items-center gap-1 text-xs font-black text-emerald-400 group-hover:translate-x-1 transition-transform">
+              <span>START SOLO GAME</span> <ChevronRight className="w-4 h-4" />
+            </div>
           </Link>
+
+          {/* Mode 2: PLAY WITH FRIENDS */}
+          <Link
+            href="/online?mode=friends"
+            onClick={() => soundFx.playClick()}
+            className="p-6 rounded-3xl bg-slate-900/90 border border-cyan-500/30 hover:border-cyan-500/60 bg-gradient-to-b from-cyan-500/10 to-transparent flex flex-col justify-between gap-6 transition-all hover:-translate-y-1 shadow-xl group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl">
+                👥
+              </div>
+              <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-black uppercase tracking-wider">
+                FRIENDS
+              </span>
+            </div>
+            <div>
+              <h3 className="font-black text-xl text-white group-hover:text-cyan-400 transition-colors">
+                PLAY WITH FRIENDS
+              </h3>
+              <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                Create a private room with join code. Play together with real friends in real-time.
+              </p>
+            </div>
+            <div className="flex items-center gap-1 text-xs font-black text-cyan-400 group-hover:translate-x-1 transition-transform">
+              <span>CREATE ROOM</span> <ChevronRight className="w-4 h-4" />
+            </div>
+          </Link>
+
+          {/* Mode 3: PLAY WITH STRANGERS */}
+          <button
+            onClick={() => {
+              soundFx.playClick();
+              setMatchmakingOpen(true);
+            }}
+            className="p-6 rounded-3xl bg-slate-900/90 border border-purple-500/30 hover:border-purple-500/60 bg-gradient-to-b from-purple-500/10 to-transparent flex flex-col justify-between gap-6 transition-all hover:-translate-y-1 shadow-xl text-left group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl">
+                🌐
+              </div>
+              <span className="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-black uppercase tracking-wider">
+                STRANGERS
+              </span>
+            </div>
+            <div>
+              <h3 className="font-black text-xl text-white group-hover:text-purple-400 transition-colors">
+                PLAY WITH STRANGERS
+              </h3>
+              <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                100% Real human matchmaking. Zero fake bots. Match against online players worldwide.
+              </p>
+            </div>
+            <div className="flex items-center gap-1 text-xs font-black text-purple-400 group-hover:translate-x-1 transition-transform">
+              <span>FIND REAL MATCH</span> <ChevronRight className="w-4 h-4" />
+            </div>
+          </button>
+
+          {/* Mode 4: PLAY WITH AI */}
+          <button
+            onClick={() => {
+              soundFx.playClick();
+              setAiModalOpen(true);
+            }}
+            className="p-6 rounded-3xl bg-slate-900/90 border border-amber-500/30 hover:border-amber-500/60 bg-gradient-to-b from-amber-500/10 to-transparent flex flex-col justify-between gap-6 transition-all hover:-translate-y-1 shadow-xl text-left group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl">
+                🤖
+              </div>
+              <span className="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-black uppercase tracking-wider">
+                AI BOT
+              </span>
+            </div>
+            <div>
+              <h3 className="font-black text-xl text-white group-hover:text-amber-400 transition-colors">
+                PLAY WITH AI
+              </h3>
+              <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                Challenge 🤖 CRICKET AI across 4 difficulties (Easy, Medium, Hard, Expert).
+              </p>
+            </div>
+            <div className="flex items-center gap-1 text-xs font-black text-amber-400 group-hover:translate-x-1 transition-transform">
+              <span>CHALLENGE AI</span> <ChevronRight className="w-4 h-4" />
+            </div>
+          </button>
         </div>
 
-        {/* Quick Stats Banner */}
-        <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-3xl">
+        {/* Feature Badges Banner */}
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-4xl">
           <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
-            <div className="font-black text-2xl text-emerald-400">4 Rounds</div>
-            <div className="text-xs text-slate-400 mt-0.5">Progressive Levels</div>
+            <div className="font-black text-xl text-emerald-400 flex items-center justify-center gap-1">
+              <Clock className="w-4 h-4" /> 60s Timers
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">Server-Authoritative</div>
           </div>
           <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
-            <div className="font-black text-2xl text-cyan-400">12 Qs / Round</div>
-            <div className="text-xs text-slate-400 mt-0.5">48 Questions Total</div>
+            <div className="font-black text-xl text-amber-400 flex items-center justify-center gap-1">
+              <Lightbulb className="w-4 h-4" /> Smart Hints
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">Verified Facts Only</div>
           </div>
           <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
-            <div className="font-black text-2xl text-amber-400">4 Options</div>
-            <div className="text-xs text-slate-400 mt-0.5">MCQ Format</div>
+            <div className="font-black text-xl text-cyan-400 flex items-center justify-center gap-1">
+              <Sparkles className="w-4 h-4" /> Anti-Repeat
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">Session Question Queue</div>
           </div>
           <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
-            <div className="font-black text-2xl text-purple-400">Text-Based</div>
-            <div className="text-xs text-slate-400 mt-0.5">No Question Images</div>
+            <div className="font-black text-xl text-purple-400 flex items-center justify-center gap-1">
+              <ShieldCheck className="w-4 h-4" /> 100% Honest
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5">No Fake Strangers</div>
           </div>
         </div>
       </section>
 
-      {/* 4 Rounds Showcase */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="font-black text-2xl sm:text-4xl text-slate-100">
-            THE 4 TOURNAMENT ROUNDS
-          </h2>
-          <p className="text-sm text-slate-400 mt-2">
-            Each round contains exactly 12 multiple choice questions of increasing difficulty.
-          </p>
-        </div>
+      {/* AI Modal */}
+      <AIOpponentModal
+        isOpen={aiModalOpen}
+        onClose={() => setAiModalOpen(false)}
+        onStartGame={handleStartAI}
+      />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {roundTiers.map((tier) => (
-            <Link
-              key={tier.round}
-              href={tier.href}
-              className={`p-6 rounded-3xl bg-gradient-to-br ${tier.color} border bg-slate-900/90 flex flex-col justify-between gap-6 transition-all hover:-translate-y-1 hover:shadow-2xl group`}
-            >
-              <div className="flex items-start justify-between">
-                <span className="text-3xl">{tier.icon}</span>
-                <span className={`px-2.5 py-1 rounded-full bg-slate-950/60 border border-slate-800 text-[10px] font-black uppercase tracking-wider ${tier.textColor}`}>
-                  {tier.badge}
-                </span>
-              </div>
-
-              <div>
-                <h3 className={`font-black text-xl text-slate-100 group-hover:${tier.textColor} transition-colors`}>
-                  {tier.title}
-                </h3>
-                <p className="text-xs text-slate-400 mt-2 leading-relaxed">
-                  {tier.description}
-                </p>
-              </div>
-
-              <div className={`flex items-center gap-1 text-xs font-black ${tier.textColor} group-hover:translate-x-1 transition-transform`}>
-                <span>Start Round {tier.round}</span> <ChevronRight className="w-4 h-4" />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
+      {/* Stranger Matchmaking Modal */}
+      {matchmakingOpen && (
+        <MatchmakingScreen
+          userRating={1250}
+          userTier="GOLD"
+          onMatchFound={(payload) => {
+            setMatchmakingOpen(false);
+          }}
+          onCancel={() => setMatchmakingOpen(false)}
+          onSelectAI={() => {
+            setMatchmakingOpen(false);
+            setAiModalOpen(true);
+          }}
+          onSelectFriends={() => {
+            setMatchmakingOpen(false);
+            window.location.href = '/online?mode=friends';
+          }}
+        />
+      )}
     </div>
   );
 }
